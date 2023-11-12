@@ -3,10 +3,23 @@
     <head>
         <script src="./newFolder/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="/__/firebase/10.6.0/firebase-app-compat.js"></script>
+        <!-- include only the Firebase features as you need -->
+        <script src="/__/firebase/10.6.0/firebase-auth-compat.js"></script>
+        <script src="/__/firebase/10.6.0/firebase-database-compat.js"></script>
+        <script src="/__/firebase/10.6.0/firebase-firestore-compat.js"></script>
+        <script src="/__/firebase/10.6.0/firebase-functions-compat.js"></script>
+        <script src="/__/firebase/10.6.0/firebase-messaging-compat.js"></script>
+        <script src="/__/firebase/10.6.0/firebase-storage-compat.js"></script>
+        <script src="/__/firebase/10.6.0/firebase-analytics-compat.js"></script>
+        <script src="/__/firebase/10.6.0/firebase-remote-config-compat.js"></script>
+        <script src="/__/firebase/10.6.0/firebase-performance-compat.js"></script>
+        <!-- 
+        initialize the SDK after all desired features are loaded, set useEmulator to false
+        to avoid connecting the SDK to running emulators.
+        -->
+        <script src="/__/firebase/init.js?useEmulator=true"></script>
         <script src="scores.js"></script>
-        <script defer src="/__/firebase/10.6.0/firebase-app-compat.js"></script>
-        <script defer src="/__/firebase/10.6.0/firebase-firestore-compat.js"></script>
-        <script defer src="/__/firebase/init.js?useEmulator=true"></script>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body id="body">
@@ -26,71 +39,5 @@
         <div class = "container">
             <canvas id="myChart"></canvas>
         </div>
-
-        <script defer type="text/javascript">
-            //const db = firebase.firestore();
-            //var pointsref = db.collection("points");
-            //var pointsRed = pointsref.where("team", "==", "Red");
-            //var pointsBlue = pointsref.where("team", "==", "Blue");
-            //console.log(pointsRed);
-            var redScore = redScore;
-            var blueScore = blueScore;
-            let myChart = document.getElementById("myChart").getContext("2d");
-            let minDataValue = 0;
-            let barChart = new Chart(myChart, {
-                type:"pie",
-                data: {
-                    labels:['Blue', 'Red'],
-                    datasets:[{
-                        label:'Points',
-                        data:[
-                            blueScore,
-                            redScore
-                        ],
-
-                        backgroundColor:[
-                            'rgba(20, 0, 235, .8)',
-                            'rgba(227, 0, 49, 0.8)'
-                        ],
-                        borderWidth:4,
-                        borderColor:'#777'
-                    }]
-                },
-
-                options: {
-                    legend: {
-                        display: true,
-                        position: 'left',
-                        labels: {
-                            fontSize: 30,
-                        }
-                    }
-                }
-            });
-        </script>
-
-        <script type="module">
-            // Import the functions you need from the SDKs you need
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
-            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-analytics.js";
-            // TODO: Add SDKs for Firebase products that you want to use
-            // https://firebase.google.com/docs/web/setup#available-libraries
-        
-            // Your web app's Firebase configuration
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-            const firebaseConfig = {
-            apiKey: "AIzaSyCKdVD5r-M1HVXSFgSO9SKlq2s0fGKrSgE",
-            authDomain: "hackumass2023-33e91.firebaseapp.com",
-            projectId: "hackumass2023-33e91",
-            storageBucket: "hackumass2023-33e91.appspot.com",
-            messagingSenderId: "547631558945",
-            appId: "1:547631558945:web:41ef6e415463bfe2adce60",
-            measurementId: "G-W91C4P463C"
-            };
-        
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-            const analytics = getAnalytics(app);
-        </script>
     </body>
 </html>

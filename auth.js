@@ -1,3 +1,5 @@
+uid = null;
+
 const auth = firebase.auth();
 
 const whenSignedIn = document.getElementById("whenSignedIn");
@@ -22,6 +24,7 @@ unsubscribe2 = undefined;
 auth.onAuthStateChanged(async user => {
     if (user) {
         // signed in
+        uid = user.uid;
         var pointsref = db.collection("points");
         if (await pointsref.doc(user.uid).get().then((doc) => {
             return doc.data();
