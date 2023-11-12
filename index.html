@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>hackumass2023</title>
+
+    <script defer src="/__/firebase/10.6.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/10.6.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <script defer src="auth.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    
+    <h1>Hack UMASS 2023</h1>
+    <p>Hello world!</p>
+
+    <section id="whenSignedOut">
+      <button id="signInButton" class="buttonPrimary">Sign in with Google</button>
+    </section>
+
+    <section id="whenSignedIn" hidden="true">
+      <div id="userDetails"></div>
+      <button id="signOutButton" class="buttonPrimary">Sign out</button>
+      <button id="submitCodeButton" class="buttonCode">Submit Code</button>
+      <a href="questPage.html">
+        <button class="button" id="QuestButton">Quests</button>
+      </a>
+      <a href="scannerPage.html">
+          <button class="button" id="ScannerButton">Scanner</button>
+      </a>
+      <a href="scoreBoardPage.html">
+          <button class="button" id="Scoreboard">Scoreboard</button>
+      </a>
+      <a href="index.html">
+          <button class="button" id="HomeButton">Home</button>
+      </a>
+      <h1 id = "opener"></h1>
+    </section>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyCKdVD5r-M1HVXSFgSO9SKlq2s0fGKrSgE",
+        authDomain: "hackumass2023-33e91.firebaseapp.com",
+        projectId: "hackumass2023-33e91",
+        storageBucket: "hackumass2023-33e91.appspot.com",
+        messagingSenderId: "547631558945",
+        appId: "1:547631558945:web:41ef6e415463bfe2adce60",
+        measurementId: "G-W91C4P463C"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+  </body>
+</html>

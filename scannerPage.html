@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./newFolder/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body id="body">
+        <a href="questPage.html">
+            <button class="button" id="QuestButton">Quests</button>
+        </a>
+        <a href="scannerPage.html">
+            <button class="button" id="ScannerButton">Scanner</button>
+        </a>
+        <a href="scoreBoardPage.html">
+            <button class="button" id="Scoreboard">Scoreboard</button>
+        </a>
+        <a href="index.html">
+            <button class="button" id="HomeButton">Home</button>
+        </a>
+
+        <div id="result"></div>
+        <div id="my-qr-reader" style="width:500px;"></div>
+        <script src="https://unpkg.com/html5-qrcode"></script>
+
+        <script>
+            function domReady(fn) {
+                if(document.readyState === "complete" || document.readyState === "interactive") {
+                    setTimeout(fn,1)
+                }else{
+                    document.addEventListener("DOMContentLoaded", fn)
+                }
+            }
+
+            domReady(function(){
+                var myqr = document.getElementById("result")
+                var lastResult,countResults = 0;
+
+                function onScanSuccess(decodeText, decodeResult){
+                    if(decodeText !== lastResult) {
+                        ++countResults;
+                        lastResult = decodeText;
+
+                        alert("Your Qr is" + decodeText,decodeResult)
+                    }
+                }
+
+                var htmlscanner = new Html5QrcodeScanner("my-qr-reader",{fps:10,qrbox:250})
+                
+                htmlscanner.render(onScanSuccess)
+            })
+
+        </script>
+    <script>
+    </script>
+    </body>
+</html>

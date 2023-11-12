@@ -1,0 +1,13 @@
+body {
+    background-color: rgb(186, 223, 255)
+}
+
+button {
+    font-family:'Courier New', Courier, monospace;
+    font-weight: Bold;
+    font-size: 25px;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    border-color: white;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./newFolder/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+        <script src="qrCode.js"></script>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body id="body">
+        <a href="questPage.html">
+            <button class="button" id="QuestButton">Quests</button>
+        </a>
+        <a href="scannerPage.html">
+            <button class="button" id="ScannerButton">Scanner</button>
+        </a>
+        <a href="scoreBoardPage.html">
+            <button class="button" id="Scoreboard">Scoreboard</button>
+        </a>
+        <a href="index.html">
+            <button class="button" id="HomeButton">Home</button>
+        </a>
+        <table id = "available">
+            <th>Quests Available</th>
+        </table>
+        <script>
+            var blueClueDict = {
+                "DuBois Library": ["4(3(1+1))+2", "Crushed under the weight of knowledge.", "The Comet"],
+                "Campus Center": ["You've heard of the stairway to heaven, but where is the escalator to hell?", "My dorm walls are white, but this place actually had a paint budget.", "This brutal building makes me hungry (cause it looks like a waffle)."],
+                "Hasbrouk": ["A building so nice they wanted more.", "Named after a professor of math and physics who died a century ago. His name was Philip Bevier _____.", "Due west from the LSL."],
+                "Bartlett": ["This building took the L a little too literally.", "Right across from the Hall of Memories.", "Indexed right above Berkshire."]
+            };
+
+            var redClueDict = {
+                "Herter Hall": ["Where you go to laugh.", "It's all Greek to me.", "With a few steps and a quick wait, you've escaped campus."],
+                "ILC": ["Green chairs, green roof, green building.", "What time will my bus be here?", "A change of height from your entrance to your exit."],
+                "Franklin Dining": ["I feel like I'm going in circles.", "Red hot hot sauce.", "More scoops than a Cold Stone Creamery."],
+                "Performing Arts Center": ["A goose's everyday view.", "A compilation of arts.", "A great view of the Haigis Mall."]
+            };
+
+            function getRandomInt(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max-min)+min);
+            }
+            
+            let availabletable = document.createElement("table");
+            let i = 1;
+
+            for (var key in blueClueDict) {
+                availabletable.insertRow(0);
+                let newCell = availabletable.rows[0].insertCell();
+                newCell.textContent = "Location " + i + ": " + blueClueDict[key][getRandomInt(0,3)];
+                i = i+1;
+            }
+            document.body.appendChild(availabletable);
+            
+        </script>
+         <table id="completed">
+            <th>Quests Completed</th>
+        </table>
+        <script>
+            var finishedDict = {
+            }
+            
+            let finishedtable = document.createElement("table");
+            for (var key in finishedDict) {
+                finishedtable.insertRow(0);
+                let newCell = finishedtable.rows[0].insertCell();
+                newCell.textContent = key;
+            }
+            document.body.appendChild(finishedtable);
+            
+        </script>
+    </body>
+</html>
