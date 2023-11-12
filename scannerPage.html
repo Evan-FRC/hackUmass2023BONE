@@ -71,26 +71,33 @@
             });
 
             async function qrScanned(qrString){
+                qrString = qrString.substring(7, qrString.length);
                 const auth = firebase.auth();
                 const db = firebase.firestore();
                 var pointsref = db.collection("points");
                 playerColor = await pointsref.doc(uid).get().then((doc) => {
                     return doc.data().team;
-                })
-                console.log(playerColor);
-                console.log(teamDict[qrScanned]);
-                if (teamDict[qrScanned] == "Blue" && playerColor == "Blue"){ 
-                    pointsref.doc(uid).set({
+                });
+                var finishedCodes = await pointsref.doc(uid).get().then((doc) => {
+                    return doc.data().finishedCodes;
+                });
+                console.log(finishedCodes);
+                if (teamDict[qrString] == "Blue" && playerColor == "Blue" && !finishedCodes.includes(qrString)){
+                    finishedCodes.push(qrString);
+                    pointsref.doc(uid).update({
                         points: await pointsref.doc(uid).get().then((doc) => {
                             return doc.data().points + 1;
-                        })
+                        }),
+                        finishedCodes: finishedCodes
                     });
                 }
-                else if (teamDict[qrScanned] == "Red" && playerColor == "Red"){ 
-                    pointsref.doc(uid).set({
+                else if (teamDict[qrString] == "Red" && playerColor == "Red" && !finishedCodes.includes(qrString)){ 
+                    finishedCodes.push(qrString);
+                    pointsref.doc(uid).update({
                         points: await pointsref.doc(uid).get().then((doc) => {
                             return doc.data().points + 1;
-                        })
+                        }),
+                        finishedCodes: finishedCodes
                     });
                 }
             }

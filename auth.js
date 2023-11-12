@@ -1,5 +1,3 @@
-uid = null;
-
 const auth = firebase.auth();
 
 const whenSignedIn = document.getElementById("whenSignedIn");
@@ -13,10 +11,8 @@ const userDetails = document.getElementById("userDetails");
 const provider = new firebase.auth.GoogleAuthProvider();
 
 const db = firebase.firestore();
-const submitCodeButton = document.getElementById("submitCodeButton");
 
 signInButton.onclick = () => auth.signInWithPopup(provider);
-
 signOutButton.onclick = () => auth.signOut();
 
 unsubscribe = undefined;
@@ -24,15 +20,15 @@ unsubscribe2 = undefined;
 auth.onAuthStateChanged(async user => {
     if (user) {
         // signed in
-        uid = user.uid;
         var pointsref = db.collection("points");
         if (await pointsref.doc(user.uid).get().then((doc) => {
             return doc.data();
         }) == undefined) {
             pointsref.doc(user.uid).set({
                 uid: user.uid,
-                points: 1,
-                team: Math.random() > 0.5 ? "Red" : "Blue"
+                points: 0,
+                team: Math.random() > 0.5 ? "Red" : "Blue",
+                finishedCodes: []
             });
         }
         whenSignedIn.hidden = false;
@@ -44,13 +40,6 @@ auth.onAuthStateChanged(async user => {
         unsubscribe2 = pointsref.doc(user.uid).onSnapshot(querySnapshot => {
               document.getElementById("opener").innerHTML = "You are on team " + querySnapshot.data().team + ". Use the clues to find QR codes around campus. ";
         });
-        submitCodeButton.onclick = async () => {
-            pointsref.doc(user.uid).set({
-                points: await pointsref.doc(user.uid).get().then((doc) => {
-                    return doc.data().points + 1;
-                })
-            });
-        };
     } else {
         // signed out
         whenSignedIn.hidden = true;
